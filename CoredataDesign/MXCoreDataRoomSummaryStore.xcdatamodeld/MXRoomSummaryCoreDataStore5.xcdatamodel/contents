@@ -1,9 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22A8380" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="5">
+    <entity name="MXCredentials" representedClassName="MXCredentials" syncable="YES" codeGenerationType="class">
+        <attribute name="accessToken" optional="YES" attributeType="String"/>
+        <attribute name="accessTokenExpiresAt" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="allowedCertificate" optional="YES" attributeType="Binary"/>
+        <attribute name="homeServer" optional="YES" attributeType="String"/>
+        <attribute name="homeServerName" optional="YES" attributeType="String"/>
+        <attribute name="identityServer" optional="YES" attributeType="String"/>
+        <attribute name="identityServerAccessToken" optional="YES" attributeType="String"/>
+        <attribute name="ignoredCertificate" optional="YES" attributeType="Binary"/>
+        <attribute name="loginOthers" optional="YES" attributeType="Transformable"/>
+        <attribute name="refreshToken" optional="YES" attributeType="String"/>
+        <attribute name="userId" optional="YES" attributeType="String"/>
+        <relationship name="device" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MXDevice"/>
+    </entity>
+    <entity name="MXDevice" representedClassName="MXDevice" syncable="YES" codeGenerationType="class">
+        <attribute name="deviceId" optional="YES" attributeType="String"/>
+        <attribute name="displayName" optional="YES" attributeType="String"/>
+        <attribute name="lastSeenIp" optional="YES" attributeType="String"/>
+        <attribute name="lastSeenTs" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="lastSeenUserAgent" optional="YES" attributeType="String"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MXMember" inverseName="device" inverseEntity="MXMember"/>
+    </entity>
     <entity name="MXMember" representedClassName="MXMember" syncable="YES" codeGenerationType="class">
+        <attribute name="avatarUrl" optional="YES"/>
+        <attribute name="lastActiveAgo" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="memberShip" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="presence" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="userId" optional="YES" attributeType="String"/>
+        <relationship name="device" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MXDevice" inverseName="user" inverseEntity="MXDevice"/>
     </entity>
     <entity name="MXRoomLastMessage" representedClassName="MXRoomLastMessageMO" syncable="YES">
         <attribute name="s_attributedText" optional="YES" attributeType="Binary" valueTransformerName=""/>
